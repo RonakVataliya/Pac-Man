@@ -212,7 +212,7 @@ graph TD
 
 ### 3. Critical Code Snippets
 
-**Ghost Movement (BFS):**
+## 1. Ghost Pathfining
 
 ```cpp
 void PathFinding1() {
@@ -225,8 +225,37 @@ void PathFinding1() {
   }
 }
 ```
-
 *Tradeoff*: BFS guarantees shortest path but uses more memory than DFS.
+
+## 2. Maze Generation
+
+This snippet demonstrates how the maze is generated using a randomized algorithm.
+
+```cpp
+void generateMaze(int w, int h) {
+    Maze maze(w, h);
+    // Creating a maze which is small, so it is saved in a vector called "keepTrack"
+    for (int y = 0; y < h; y++) {
+        for (int x = 0; x < w; x++) {
+            if (maze.pinPoint(x, y).canGo(Left)) {
+                keepTrack.push_back('_');
+            } else {
+                keepTrack.push_back('|');
+            }
+            if (maze.pinPoint(x, y).canGo(Down)) {
+                keepTrack.push_back('.');
+            } else {
+                keepTrack.push_back('_');
+            }
+            if (x == (w - 1) && !maze.pinPoint(x, y).canGo(Right)) {
+                keepTrack.push_back('|');
+            }
+        }
+    }
+    // Stretching the maze and setting boundaries
+    // ...
+}
+```
 
 ---
 
