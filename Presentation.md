@@ -98,6 +98,50 @@ graph TD
   D -->|Pause| F[pauseMenu]
 ```
 
+## Game Structure
+
+### Main Function
+- **`main()`**: Entry point of the game, initializes the game and starts the main loop.
+  - **`Game()`**: Initializes the game state and settings.
+    - **`hideCursor()`**: Hides the console cursor for a cleaner display.
+    - **`loadHighScore()`**: Loads the high score from a file.
+    - **`createMaze()`**: Generates the maze layout.
+    - **`initializeColors()`**: Sets the colors for the game elements.
+    - **`spawnCharacters()`**: Initializes positions for Pac-Man and ghosts.
+    - **`displayMainMenu()`**: Shows the main menu options.
+    - **`chooseDifficulty()`**: Allows the player to select the difficulty level.
+    - **`setDimensions()`**: Sets the maze dimensions based on user input.
+    - **`generateMaze()`**: Creates the maze structure.
+    - **`initializeGameState()`**: Resets game variables for a new game.
+    - **`PacMan()`**: Creates the initial Pac-Man character.
+
+### Game Loop
+- **`while (!game.isGameOver())`**: Main game loop that continues until the game is over.
+  - **`game.handleInput()`**: Processes user input for movement and actions.
+    - **`checkCollision()`**: Validates movement against walls and ghosts.
+    - **`movePacMan()`**: Moves Pac-Man based on user input.
+    - **`eatDot()`**: Checks if Pac-Man eats a dot.
+    - **`eatCherry()`**: Checks if Pac-Man eats a cherry.
+    - **`pauseGame()`**: Pauses the game if 'X' is pressed.
+    - **`exitGame()`**: Exits the game if 'ESC' is pressed.
+  - **`game.update()`**: Updates the game state.
+    - **`updateGhosts()`**: Moves ghosts towards Pac-Man.
+    - **`checkGhostCollision()`**: Detects if ghosts collide with Pac-Man.
+    - **`updateScore()`**: Updates the score based on dots collected.
+    - **`checkVictory()`**: Checks if all dots are collected.
+    - **`generateNewGhostPath()`**: Generates new paths for ghosts.
+  - **`game.render()`**: Renders the current game state to the console.
+    - **`printMap()`**: Displays the maze and characters.
+    - **`displayScore()`**: Shows the current score.
+    - **`displayLives()`**: Shows remaining lives.
+
+### Game Over Handling
+- **`if (game.isGameOver())`**: Checks if the game is over.
+  - **`displayGameOverScreen()`**: Shows the game over message and score.
+  - **`waitForInput()`**: Waits for 'R' to restart or 'ESC' to exit.
+  - **`restartGame()`**: Restarts the game if 'R' is pressed.
+  - **`return 0`**: Exits the program if 'ESC' is pressed.
+
 ---
 
 ## Depth-Wise Analysis 
