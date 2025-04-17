@@ -155,11 +155,60 @@ graph TD
   - **Performance vs. Accuracy**: BFS ensures shortest path but costs O(n²); greedy is O(n) but may trap Pac-Man.
 
 ### 2. Data Structures
-| Structure         | Use Case                        | Pros/Cons                  |
-|-------------------|---------------------------------|----------------------------|
-| `vector<int>`     | Maze walls, food locations      | Fast access; fixed size    |
-| `deque<float>`    | Dynamic food positions          | Efficient inserts/deletes  |
-| `bool[256]`       | Keyboard input states           | Low memory; manual management |
+
+## 1. Arrays
+
+| Name        | Type          | Description                                                                 |
+|-------------|---------------|-----------------------------------------------------------------------------|
+| `map`       | `char[50][50]`| A 2D array representing the maze layout, where each cell contains characters indicating walls, paths, dots, cherries, and boundaries. |
+| `tmp_map`   | `char[50][50]`| A temporary 2D array used for pathfinding algorithms (BFS) to track visited cells and the current state of the maze during ghost movement calculations. |
+
+## 2. Vectors
+
+| Name                | Type                     | Description                                                                 |
+|---------------------|--------------------------|-----------------------------------------------------------------------------|
+| `keepTrack`         | `vector<char>`           | A dynamic array that keeps track of the maze structure during generation, storing characters that represent walls and paths. |
+| `walk1_queue`      | `vector<target>`         | A vector that stores the path for the first ghost to reach Pac-Man, containing coordinates of the next cell to move to. |
+| `walk2_queue`      | `vector<target>`         | A vector that stores the path for the second ghost to reach Pac-Man.        |
+| `walk3_queue`      | `vector<target>`         | A vector that stores the path for the third ghost to reach Pac-Man.         |
+| `BFS1`             | `vector<walk>`           | A vector that stores the state of the first ghost's movement during the BFS pathfinding algorithm. |
+| `BFS2`             | `vector<walk>`           | A vector that stores the state of the second ghost's movement during the BFS pathfinding algorithm. |
+| `BFS3`             | `vector<walk>`           | A vector that stores the state of the third ghost's movement during the BFS pathfinding algorithm. |
+
+## 3. Structures
+
+| Name                | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| `Coords`            | A structure that holds x and y coordinates of a cell in the maze, with a static array of direction offsets for movement. |
+| `MazeCell`          | Represents a single cell in the maze, containing a `connections` variable to track open paths and methods to check connectivity and mark the cell as visited. |
+| `MazePosition`      | Represents the current position of a character (Pac-Man or a ghost) within the maze, providing methods to check movement possibilities and to move to new positions. |
+| `walk`              | Used in the BFS algorithm to store the current position of a ghost, the number of steps taken to reach that position, and the index of the previous position in the path. |
+| `target`            | A simple structure that holds the x and y coordinates of a target position for the ghosts. |
+
+## 4. Enumerations
+
+| Name                | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| `eDirection`        | An enumeration defining possible movement directions (LEFT, RIGHT, UP, DOWN) for Pac-Man and the ghosts. |
+| `Orientation`       | An enumeration used to define the orientation of connections in the maze (Left, Right, Up, Down). |
+
+## 5. Global Variables
+
+| Name                | Type          | Description                                                                 |
+|---------------------|---------------|-----------------------------------------------------------------------------|
+| `pts`               | `int`        | Tracks the current score of the player.                                    |
+| `difficulty`        | `int`        | Stores the current difficulty level of the game.                           |
+| `deathCount`        | `int`        | Counts the number of times Pac-Man has died.                              |
+| `frightenedMod`     | `bool`       | Indicates whether the frightened mode is active for ghosts.                |
+| `isNewGame`         | `bool`       | Indicates whether the game is a new game or a loaded game.                |
+| `frameCount`        | `int`        | Counts the number of frames processed in the game loop.                   |
+| `initialFrame`      | `int`        | Stores the frame count when frightened mode is activated.                 |
+| `mapColor`          | `int`        | Color code for the maze walls.                                            |
+| `PlaceHolderMapColor`| `int`       | Temporary storage for the map color before it changes.                    |
+| `PacmanColor`       | `int`        | Color code for Pac-Man.                                                  |
+| `primaryColor`      | `int`        | Primary color code for the game interface.                               |
+| `secondaryColor`    | `int`        | Secondary color code for the game interface.                             |
+| `G1X`, `G1Y`
 
 ### 3. Critical Code Snippets
 
